@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,7 +28,7 @@ import org.testng.annotations.Test;
 		  }
 		 @AfterMethod
 		 void afterTestExecution() {
-			System.out.println("Maintainence/Purge Records displayed succesfully");
+			System.out.println("Maintainence/Purge Records executed succesfully");
 		 }
 	  @Test
 	  public void verifyOrangeHRMLogin() {
@@ -84,8 +85,9 @@ import org.testng.annotations.Test;
 		   	      String element = b.getText();
 		   	      System.out.println(element); 
 		   	      
-		   	      if(element.equalsIgnoreCase("Odis Adalwin")) {
+		   	      if(element.equalsIgnoreCase(Empname)) {
 		   	    	  b.click();
+		   	    	Thread.sleep(5000);
 		   	    	  break;
 		   	     }
 		        }
@@ -96,38 +98,46 @@ import org.testng.annotations.Test;
 		      	 
 		      	driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div[2]/div/form/div[2]/button")).click();
 		      	 System.out.println(">> Employee data is Downloaded successfully");
-		      	 
-		     //Purge Records
-				 List<WebElement> list = driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[2]/nav/ul/li[1]/span/i"));
-				 
-			      		
-				   int count = list.size();
-				   System.out.println(count);
-				    list.get(count).click();
-				      
-				   Iterator<WebElement> iterator = list.iterator();
-				    while(iterator.hasNext()) {
+		      	Thread.sleep(5000);
+		      	
+		       //Purge Records
+				driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/header/div[2]/nav/ul/li[1]/span")).click();
+		
+			    List<WebElement> list= driver.findElements(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[1]/form/div[1]/div/div/div/div[2]/div/div/input"));	
+			      System.out.println(list.size());
+			   
+			      Iterator<WebElement> iterator1 = list.iterator();
+				   while(iterator1.hasNext()) {
 				   	      
-				   WebElement webElement =(WebElement) iterator.next();
+				   WebElement webElement =(WebElement) iterator1.next();
 				    System.out.println(webElement.getText());
 				   	       
-				   	  if(webElement.getText().equals("Candidate Records")){
-				   	      webElement.click();
-				   	        	
-				   	 WebElement Candidaterecord = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[1]/form/div[1]/div/div/div/div[2]/div/div/input"));
-				   	Candidaterecord.sendKeys(Vacancy);
-			      	Thread.sleep(3000);
-			      	System.out.println(">> Candidaterecord displayed succesfully");    
-			      	
-			      	driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[2]/div[1]/button")).click(); //Purge All
-				   	   }
-				  	  }
-		      	
-				}	
-			catch(Exception e) {
+				  	if(webElement.getText().equals("Candidate Records")){
+				        webElement.click();
+			      
+			   	     }
+				    
+				    driver.findElement(By.cssSelector("input[placeholder='Type for hints...']")).sendKeys(Vacancy);
+				    Thread.sleep(4000);
+				    System.out.println(">> Vacancy is displayed succesfully");
+				    driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[1]/form/div[2]/button")).click();
+				    System.out.println(">> Search results: Candidate name, Date of Application and status is displayed succesfully");
+				    
+					driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[2]/div[1]/button")).click(); //Purge All
+					driver.findElement(By.xpath("//*[@id=\"app\"]/div[3]/div/div/div/div[3]/button[1]")).click();            //dismiss alert
+					System.out.println(">>Purge Candidate alert box: No Cancel selected");
+					
+					
+					driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[2]/div[1]/button")).click(); //Purge All
+					driver.findElement(By.xpath("//*[@id=\"app\"]/div[3]/div/div/div/div[3]/button[2]")).click();           //accepting alert
+					System.out.println(">>Purge Candidate alert box: Yes Purge selected");
+					
+				}
 			}
-	  }
-	 
-}
+					
+			  catch(Exception e) {
+			}
+	   }
+	}
 	
 	  
