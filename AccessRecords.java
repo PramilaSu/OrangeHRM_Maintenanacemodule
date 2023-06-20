@@ -72,7 +72,7 @@ public class AccessRecords {
          public void aftermethod() {
 			driver.quit();
 		 }
-            @Test
+            @Test(priority=2)
 		  public void searchWithInvalidData() {
 		try {
 			String InvalidEmpname= p.getProperty("employeename");
@@ -94,7 +94,7 @@ public class AccessRecords {
 	      	  }
 	 	 }
 
-	      @Test
+	      @Test(priority=1)
 		  public void searchWithValidData() {
 	    		try {
 	    			String Empname= p.getProperty("employeename");
@@ -117,7 +117,7 @@ public class AccessRecords {
 	           }
 
 	 
-		 @Test
+		 @Test(priority=0)
 		  public void downLoadPersonalData() {
 		
 		  try {
