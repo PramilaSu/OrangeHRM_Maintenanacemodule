@@ -72,7 +72,7 @@ public class PurgeEmployeeRecords {
 			   public void aftermethod() {
 				//driver.quit();
 			 }
-			 @Test
+			 @Test(priority=1)
 			 public void purgeEmployeeRecords() {
 	      
 	           try {
@@ -105,7 +105,7 @@ public class PurgeEmployeeRecords {
 		           }
 	           }  
 		     
-		        @Test
+		        @Test(priority=0)
 				 public void searchWithInvalidData() {
 		      
 		          try {
@@ -122,7 +122,7 @@ public class PurgeEmployeeRecords {
 		          }
 		        }
 		        
-		        @Test
+		        @Test(priority=2)
 				 public void verifyPurgebutton() {
 		      
 		          try {
@@ -141,7 +141,7 @@ public class PurgeEmployeeRecords {
 		          } 
 		        }
 			
-		        @Test
+		        @Test(priority=3)
 				 public void noCancelAlertBox() {
 		      
 		          try {
@@ -162,7 +162,7 @@ public class PurgeEmployeeRecords {
 		          }
 		        }
 		    
-		        @Test
+		        @Test(priority=4)
 				 public void yesAcceptAlertBox() {
 		      
 		          try {
